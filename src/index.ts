@@ -17,7 +17,7 @@ const TRANSFER_AMOUNT = 1_000_000;
 
 const main = async () => {
     // Setup the client
-    const APTOS_NETWORK: Network = apt.Network.CUSTOM;
+    const APTOS_NETWORK: apt.Network = apt.Network.CUSTOM;
     const config = new apt.AptosConfig({ network: APTOS_NETWORK });
     const aptos = new apt.Aptos(config);
     const ledgerInfo = await aptos.getLedgerInfo();
