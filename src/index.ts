@@ -7,7 +7,8 @@ const result = greet("World");
 console.log(result);
 
 
-import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+// import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+import * as apt from "@aptos-labs/ts-sdk"
 
 const ALICE_INITIAL_BALANCE = 100_000_000;
 const BOB_INITIAL_BALANCE = 0;
@@ -16,9 +17,9 @@ const TRANSFER_AMOUNT = 1_000_000;
 
 const main = async () => {
     // Setup the client
-    const APTOS_NETWORK: Network = Network.CUSTOM;
-    const config = new AptosConfig({ network: APTOS_NETWORK });
-    const aptos = new Aptos(config);
+    const APTOS_NETWORK: Network = apt.Network.CUSTOM;
+    const config = new apt.AptosConfig({ network: APTOS_NETWORK });
+    const aptos = new apt.Aptos(config);
     const ledgerInfo = await aptos.getLedgerInfo();
     console.log("Ledger Info:")
     console.log(ledgerInfo)
