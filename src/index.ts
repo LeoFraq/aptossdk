@@ -7,7 +7,7 @@ const result = greet("World");
 console.log(result);
 
 
-import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+import { Aptos, AptosConfig, Network, Account } from "@aptos-labs/ts-sdk";
 // import * as apt from "@aptos-labs/ts-sdk"
 
 const ALICE_INITIAL_BALANCE = 100_000_000;
@@ -27,6 +27,25 @@ const main = async () => {
     const ledgerInfo = await aptos.getLedgerInfo();
     console.log("Ledger Info:")
     console.log(ledgerInfo)
+
+
+    // Create two accounts
+    const alice = Account.generate();
+    const bob = Account.generate();
+
+    console.log("=== Addresses ===\n");
+    console.log(`Alice's address is: ${alice.accountAddress}`);
+    console.log(`Bob's address is: ${bob.accountAddress}`);
+
+    // build a transaction
+    const transaction = await aptos.transaction.build.transaction({
+        sender: alice.accountAddress,
+        data: {
+            function: "0x1::coin::transfer",
+            typeArguments: ["0x1::aptos_coin::AptosCoin"],
+            functionArguments: [bob.accountAddress, 100],
+        },
+    });
 
 }
 main()
