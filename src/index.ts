@@ -38,7 +38,7 @@ const main = async () => {
     console.log("=== Addresses ===\n");
     console.log(`Alice's address is: ${alice.accountAddress}`);
     console.log(`Bob's address is: ${bob.accountAddress}`);
-    const tx = await aptos.transaction.build.transaction({
+    const tx = await aptos.transaction.build.simple({
         sender: alice.accountAddress,
         data: {
             function: "0x1::coin::transfer",
