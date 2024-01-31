@@ -34,7 +34,10 @@ const main = async () => {
     // Create two accounts
     const alice = Account.generate();
     const bob = Account.generate();
-
+    await aptos.fundAccount({
+        accountAddress: alice.accountAddress,
+        amount: 100_000_000,
+    });
     console.log("=== Addresses ===\n");
     console.log(`Alice's address is: ${alice.accountAddress}`);
     console.log(`Bob's address is: ${bob.accountAddress}`);
