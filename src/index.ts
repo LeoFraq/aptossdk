@@ -38,17 +38,13 @@ const main = async () => {
     console.log("=== Addresses ===\n");
     console.log(`Alice's address is: ${alice.accountAddress}`);
     console.log(`Bob's address is: ${bob.accountAddress}`);
-
-    // build a transaction
-    const aliceFundTxn = await aptos.faucet.fundAccount({
-        accountAddress: alice.accountAddress,
-        amount: ALICE_INITIAL_BALANCE,
-    });
-    console.log("Alice's fund transaction: ", aliceFundTxn);
-
-    const bobFundTxn = await aptos.faucet.fundAccount({
-        accountAddress: bob.accountAddress,
-        amount: BOB_INITIAL_BALANCE,
+    const transaction = await aptos.transaction.build.transaction({
+        sender: alice.accountAddress,
+        data: {
+            function: "0x1::coin::transfer",
+            typeArguments: ["0x1::aptos_coin::AptosCoin"],
+            functionArguments: [bob.accountAddress, 100],
+        },
     });
 
 }
