@@ -23,7 +23,7 @@ const main = async () => {
     const config = new AptosConfig({
         network: APTOS_NETWORK,
         fullnode: fullnodeIP,
-        faucetIP: faucetIP
+        faucet: faucetIP
     });
     const aptos = new Aptos(config);
     const ledgerInfo = await aptos.getLedgerInfo();
