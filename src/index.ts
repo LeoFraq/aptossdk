@@ -69,7 +69,7 @@ const example = async () => {
 
     // Show the balances
     console.log("\n=== Balances ===\n");
-    const aliceBalance = await balance(aptos, "Alice", alice.accountAddress);
+    const aliceBalance = await balance(aptos, "Alice", alice);
     const bobBalance = await balance(aptos, "Bob", bob.accountAddress);
 
     if (aliceBalance !== ALICE_INITIAL_BALANCE) throw new Error("Alice's balance is incorrect");
@@ -78,7 +78,7 @@ const example = async () => {
     // Transfer between users
     for (let index = 0; index < counter; index++) {
         const txn = await aptos.transaction.build.simple({
-            sender: alice.accountAddress,
+            sender: alice,
             data: {
                 function: "0x1::coin::transfer",
                 typeArguments: [APTOS_COIN],
@@ -86,17 +86,17 @@ const example = async () => {
             },
         });
 
-        console.log("\n=== Transfer transaction ===\n");
-        const committedTxn = await aptos.signAndSubmitTransaction({ signer: alice, transaction: txn });
+        // console.log("\n=== Transfer transaction ===\n");
+        // const committedTxn = await aptos.signAndSubmitTransaction({ signer: alice, transaction: txn });
 
-        await aptos.waitForTransaction({ transactionHash: committedTxn.hash });
-        console.log(`Committed transaction: ${committedTxn.hash}`);
+        // await aptos.waitForTransaction({ transactionHash: committedTxn.hash });
+        // console.log(`Committed transaction: ${committedTxn.hash}`);
 
 
     }
 
     console.log("\n=== Balances after transfer ===\n");
-    const newAliceBalance = await balance(aptos, "Alice", alice.accountAddress);
+    const newAliceBalance = await balance(aptos, "Alice", alice);
     const newBobBalance = await balance(aptos, "Bob", bob.accountAddress);
 
     // Bob should have the transfer amount
