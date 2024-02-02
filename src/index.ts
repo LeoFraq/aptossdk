@@ -61,6 +61,10 @@ const main = async () => {
 
     // Show the balances
     console.log("\n=== Balances ===\n");
+    const amount = await aptos.getAccountAPTAmount({
+        accountAddress: alice,
+    });
+    console.log(`alice's balance is: ${amount}`);
     const aliceBalance = await balance(aptos, "Alice", alice);
     const bobBalance = await balance(aptos, "Bob", bob.accountAddress);
 
