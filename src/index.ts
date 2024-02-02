@@ -6,8 +6,15 @@ function greet(name: string): string {
 const result = greet("World");
 console.log(result);
 
+// curl --request GET \
+//  --url http://10.1.2.4:8080/v1/accounts/$ACC \
+//  --header 'Accept: application/json'
 
-import { Aptos, AptosConfig, Network, Account, AccountAddress } from "@aptos-labs/ts-sdk";
+// curl--request GET \
+// --url http://10.1.2.4:8080/v1/ \
+// --header 'Accept: application/json'
+
+import { Aptos, AptosConfig, Network, Account, AccountAddress, PrivateKey, Ed25519PrivateKey } from "@aptos-labs/ts-sdk";
 // import * as apt from "@aptos-labs/ts-sdk"
 const COIN_STORE = "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>";
 
@@ -25,7 +32,6 @@ const main = async () => {
     const config = new AptosConfig({
         network: APTOS_NETWORK,
         fullnode: fullnodeIP
-        // faucet: faucetIP
     });
     const aptos = new Aptos(config);
     const ledgerInfo = await aptos.getLedgerInfo();
@@ -37,27 +43,15 @@ const main = async () => {
 
 
     // Create two accounts
-    const alice = AccountAddress.fromString("0xc1d94f458bb4f66e85012bb30acd59f073121157803d1eafc35728957d001196");
+    const pkStr = "0x1";
+    const alice = AccountAddress.fromString(pkStr);
+    // const edp = Ed25519PrivateKey.fromDerivationPath(pkStr)
     const bob = Account.generate();
 
     console.log("=== Addresses ===\n");
     console.log(`Alice's address is: ${alice}`);
     console.log(`Bob's address is: ${bob.accountAddress}`);
 
-    // Fund the accounts
-    console.log("\n=== Funding accounts ===\n");
-
-    // const aliceFundTxn = await aptos.faucet.fundAccount({
-    //     accountAddress: alice.accountAddress,
-    //     amount: ALICE_INITIAL_BALANCE,
-    // });
-    // console.log("Alice's fund transaction: ", aliceFundTxn);
-
-    // const bobFundTxn = await aptos.faucet.fundAccount({
-    //     accountAddress: bob.accountAddress,
-    //     amount: BOB_INITIAL_BALANCE,
-    // });
-    // console.log("Bob's fund transaction: ", bobFundTxn);
 
     // Show the balances
     console.log("\n=== Balances ===\n");
