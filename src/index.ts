@@ -17,7 +17,7 @@ console.log(result);
 
 
 
-import { Aptos, AptosConfig, Network, Account, AccountAddress, PrivateKey, Ed25519PrivateKey, Hex, Hex, Secp256k1PrivateKey } from "@aptos-labs/ts-sdk";
+import { Aptos, AptosConfig, Network, Account, AccountAddress, PrivateKey, Ed25519PrivateKey, Hex, Secp256k1PrivateKey } from "@aptos-labs/ts-sdk";
 // import * as apt from "@aptos-labs/ts-sdk"
 const COIN_STORE = "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>";
 
