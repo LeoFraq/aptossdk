@@ -17,7 +17,7 @@ console.log(result);
 
 
 
-import { Aptos, AptosConfig, Network, Account, AccountAddress, PrivateKey, Ed25519PrivateKey } from "@aptos-labs/ts-sdk";
+import { Aptos, AptosConfig, Network, Account, AccountAddress, PrivateKey, Ed25519PrivateKey, Hex, Hex, Secp256k1PrivateKey } from "@aptos-labs/ts-sdk";
 // import * as apt from "@aptos-labs/ts-sdk"
 const COIN_STORE = "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>";
 
@@ -46,8 +46,14 @@ const main = async () => {
 
 
     // Create two accounts
-    const pkStr = "ee4f994bdb9eaf3d1f2e5182f473a5ca2d16f78f07a93b756eeb9c56c888d79d";
-    const alice = AccountAddress.fromString(pkStr);
+    const addrStr = "ee4f994bdb9eaf3d1f2e5182f473a5ca2d16f78f07a93b756eeb9c56c888d79d";
+    const alice = AccountAddress.fromString(addrStr);
+    const pkStr = "0x13bd55404f4a8eeb8d52f73db14bbfbcb9d681ce32d829eaa45d0698ca587503"
+    // const Hx = Hex.fromString(pkStr)
+    const Edkey = new Ed25519PrivateKey(pkStr)
+    const Secp = new Secp256k1PrivateKey(pkStr)
+
+    const aliceAcc = Account.fromPrivateKey({ privateKey: Edkey })
     // const edp = Ed25519PrivateKey.fromDerivationPath(pkStr)
     const bob = Account.generate();
 
@@ -78,11 +84,11 @@ const main = async () => {
         },
     });
 
-    // console.log("\n=== Transfer transaction ===\n");
-    // const committedTxn = await aptos.signAndSubmitTransaction({ signer: alice, transaction: txn });
+    console.log("\n=== Transfer transaction ===\n");
+    const committedTxn = await aptos.signAndSubmitTransaction({ signer: aliceAcc, transaction: txn });
 
-    // await aptos.waitForTransaction({ transactionHash: committedTxn.hash });
-    // console.log(`Committed transaction: ${committedTxn.hash}`);
+    await aptos.waitForTransaction({ transactionHash: committedTxn.hash });
+    console.log(`Committed transaction: ${committedTxn.hash}`);
 
     // console.log("\n=== Balances after transfer ===\n");
     // const newAliceBalance = await balance(aptos, "Alice", alice.accountAddress);
