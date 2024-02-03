@@ -14,6 +14,9 @@ console.log(result);
 // --url http://10.1.2.4:8080/v1/ \
 // --header 'Accept: application/json'
 
+
+
+
 import { Aptos, AptosConfig, Network, Account, AccountAddress, PrivateKey, Ed25519PrivateKey } from "@aptos-labs/ts-sdk";
 // import * as apt from "@aptos-labs/ts-sdk"
 const COIN_STORE = "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>";
@@ -43,7 +46,7 @@ const main = async () => {
 
 
     // Create two accounts
-    const pkStr = "0x1";
+    const pkStr = "ee4f994bdb9eaf3d1f2e5182f473a5ca2d16f78f07a93b756eeb9c56c888d79d";
     const alice = AccountAddress.fromString(pkStr);
     // const edp = Ed25519PrivateKey.fromDerivationPath(pkStr)
     const bob = Account.generate();
