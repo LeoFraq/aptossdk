@@ -48,7 +48,7 @@ const main = async () => {
     // Create two accounts
     const addrStr = "ee4f994bdb9eaf3d1f2e5182f473a5ca2d16f78f07a93b756eeb9c56c888d79d";
     const alice = AccountAddress.fromString(addrStr);
-    const pkStr = "0x13bd55404f4a8eeb8d52f73db14bbfbcb9d681ce32d829eaa45d0698ca587503"
+    const pkStr = "0x274415318af247c64cb7c40e995c77cc850c756c6e1f2b8911c714e801f9d32b"
     // const Hx = Hex.fromString(pkStr)
     const Edkey = new Ed25519PrivateKey(pkStr)
     const Secp = new Secp256k1PrivateKey(pkStr)
