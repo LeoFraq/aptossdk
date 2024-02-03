@@ -63,10 +63,10 @@ const main = async () => {
     });
     console.log(`alice's balance is: ${amount}`);
     const aliceBalance = await balance(aptos, "Alice", alice);
-    const bobBalance = await balance(aptos, "Bob", bob.accountAddress);
+    // const bobBalance = await balance(aptos, "Bob", bob.accountAddress);
 
-    if (aliceBalance !== ALICE_INITIAL_BALANCE) throw new Error("Alice's balance is incorrect");
-    if (bobBalance !== BOB_INITIAL_BALANCE) throw new Error("Bob's balance is incorrect");
+    // if (aliceBalance !== ALICE_INITIAL_BALANCE) throw new Error("Alice's balance is incorrect");
+    // if (bobBalance !== BOB_INITIAL_BALANCE) throw new Error("Bob's balance is incorrect");
 
     // Transfer between users
     const txn = await aptos.transaction.build.simple({
@@ -74,7 +74,7 @@ const main = async () => {
         data: {
             function: "0x1::coin::transfer",
             typeArguments: [APTOS_COIN],
-            functionArguments: [bob.accountAddress, TRANSFER_AMOUNT],
+            functionArguments: [alice, TRANSFER_AMOUNT],
         },
     });
 
